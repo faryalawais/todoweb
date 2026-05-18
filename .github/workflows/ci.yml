@@ -14,17 +14,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+
       - name: Install dependencies
         run: npm install
+
       - name: Run lint
         run: npm run lint
+
       - name: Run typecheck
         run: npm run typecheck
-      - name: Build
-        run: npm run build
+
       - name: Run unit tests
         run: npm run unit
+
+      - name: Build project
+        run: npm run build
