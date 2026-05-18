@@ -3,20 +3,19 @@ This project is a web application for managing to-do items, built using NestJS f
 
 ## Proposed files (brief)
 - `package.json`: Contains project dependencies and scripts.
-- `tsconfig.json`: TypeScript configuration file.
-- `.gitignore`: Specifies files to ignore in the repository.
+- `tsconfig.json`: TypeScript configuration.
+- `.gitignore`: Specifies files and directories to be ignored by Git.
 - `.github/workflows/ci.yml`: GitHub Actions workflow for CI.
-- `README.md`: Documentation for the project.
+- `README.md`: Project documentation.
 
 ## Commands
-- `lint`: Lint the codebase.
-- `typecheck`: Check TypeScript types.
-- `unit`: Run unit tests.
-- `build`: Build the project.
+- `lint`: Runs the linter to check for code quality.
+- `typecheck`: Checks TypeScript types.
+- `unit`: Runs unit tests.
+- `build`: Builds the application.
 
 ## CI / automation (optional)
-The CI workflow will run linting, type checking, and unit tests on pull requests and main branch.
+The CI workflow is set up to run on pull requests and on the main branch, ensuring that all checks are passed before merging.
 
 ## Follow-ups
-- Implement additional features for task management.
-- Set up deployment to a hosting service.
+Consider adding end-to-end tests and improving documentation.
