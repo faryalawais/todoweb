@@ -1,21 +1,22 @@
 ## Summary
-This project is a web application called 'to do web' built using NestJS for the backend, React for the frontend, and Supabase for database and authentication.
+This project is a web application for managing to-do items, built using NestJS for the backend, React for the frontend, and Supabase for authentication and database management.
 
 ## Proposed files (brief)
-- package.json: Contains project dependencies and scripts.
-- tsconfig.json: TypeScript configuration file.
-- .gitignore: Specifies files to ignore in the repository.
-- .github/workflows/ci.yml: GitHub Actions CI configuration.
-- README.md: Project documentation.
+- `package.json`: Contains project dependencies and scripts.
+- `tsconfig.json`: TypeScript configuration file.
+- `.gitignore`: Specifies files to ignore in the repository.
+- `.github/workflows/ci.yml`: GitHub Actions workflow for CI.
+- `README.md`: Documentation for the project.
 
 ## Commands
-- `npm run lint`: Lint the codebase.
-- `npm run typecheck`: Type check the TypeScript files.
-- `npm run unit`: Run unit tests.
-- `npm run build`: Build the application.
+- `lint`: Lint the codebase.
+- `typecheck`: Check TypeScript types.
+- `unit`: Run unit tests.
+- `build`: Build the project.
 
 ## CI / automation (optional)
-GitHub Actions is configured to run lint, typecheck, and build commands on pull requests and main branch pushes.
+The CI workflow will run linting, type checking, and unit tests on pull requests and main branch.
 
 ## Follow-ups
-Consider setting up deployment workflows and further enhancing the project with additional features.
+- Implement additional features for task management.
+- Set up deployment to a hosting service.
