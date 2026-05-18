@@ -1,20 +1,19 @@
 # To Do Web
 
-This is a web application for managing to-do items, built with NestJS, React, and Supabase.
+This project is a web application for managing to-do items.
 
-## Installation
+## Getting Started
 
-Run the following command to install dependencies:
-
-```bash
-npm install
-```
-
-## Running the application
-
-To start the application, run:
-
-```bash
-npm run build
-npm start
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/faryalawais/todoweb.git
+   cd todoweb
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the application:
+   ```bash
+   npm run start
+   ```
