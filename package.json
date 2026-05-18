@@ -1,0 +1,27 @@
+{
+  "name": "to-do-web",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "unit": "vitest",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^4.0.0",
+    "vitest": "^0.0.0"
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "@prisma/client": "^3.0.0",
+    "prisma": "^3.0.0",
+    "supabase-js": "^1.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
