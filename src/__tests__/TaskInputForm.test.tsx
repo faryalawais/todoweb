@@ -16,17 +16,12 @@ describe('TaskInputForm', () => {
     fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Test Description' } });
     fireEvent.click(getByText('Add Task'));
 
-    await waitFor(() => {
-      expect(getByText('Task added successfully!')).toBeInTheDocument();
-    });
+    await waitFor(() => expect(supabase.from().insert).toHaveBeenCalled());
   });
 
   it('should not add a task without a title', async () => {
     const { getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
     fireEvent.click(getByText('Add Task'));
-
-    await waitFor(() => {
-      expect(getByText('Task title is required.')).toBeInTheDocument();
-    });
+    await waitFor(() => expect(window.alert).toHaveBeenCalledWith('Task title is required.'));
   });
 });
