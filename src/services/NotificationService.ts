@@ -1,5 +1,8 @@
 class NotificationService {
-  static notify(message) {
+  static success(message) {
+    alert(message);
+  }
+  static error(message) {
     alert(message);
   }
 }
