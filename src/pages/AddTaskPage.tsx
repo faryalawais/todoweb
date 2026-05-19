@@ -6,14 +6,14 @@ import { supabase } from '../supabaseClient';
 const AddTaskPage = () => {
   const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   const fetchTasks = async () => {
     const { data } = await supabase.from('tasks').select('*');
     setTasks(data);
   };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   const handleTaskAdded = (newTask) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -21,7 +21,7 @@ const AddTaskPage = () => {
 
   return (
     <div>
-      <h1>Add Task</h1>
+      <h1>Add New Task</h1>
       <TaskInputForm onTaskAdded={handleTaskAdded} />
       <TaskList tasks={tasks} />
     </div>
