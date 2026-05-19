@@ -9,7 +9,7 @@ const TaskInputForm = ({ onTaskAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title) {
-      NotificationService.show('Task title is required.');
+      NotificationService.error('Task title is required.');
       return;
     }
 
@@ -18,9 +18,9 @@ const TaskInputForm = ({ onTaskAdded }) => {
       .insert([{ title, description }]);
 
     if (error) {
-      NotificationService.show('Error adding task: ' + error.message);
+      NotificationService.error('Failed to add task.');
     } else {
-      NotificationService.show('Task added successfully!');
+      NotificationService.success('Task added successfully!');
       onTaskAdded(data[0]);
       setTitle('');
       setDescription('');
