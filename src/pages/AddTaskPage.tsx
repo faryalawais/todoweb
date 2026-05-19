@@ -16,12 +16,12 @@ const AddTaskPage = () => {
   }, []);
 
   const handleTaskAdded = (newTask) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks([...tasks, newTask]);
   };
 
   return (
     <div>
-      <h1>Add Task</h1>
+      <h1>Add New Task</h1>
       <TaskInputForm onTaskAdded={handleTaskAdded} />
       <TaskList tasks={tasks} />
     </div>
