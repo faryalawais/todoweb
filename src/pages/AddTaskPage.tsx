@@ -16,7 +16,7 @@ const AddTaskPage = () => {
   }, []);
 
   const handleTaskAdded = (newTask) => {
-    setTasks([...tasks, newTask]);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
   return (
