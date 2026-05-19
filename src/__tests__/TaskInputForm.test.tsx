@@ -8,7 +8,7 @@ jest.mock('../supabaseClient');
 describe('TaskInputForm', () => {
   it('should add a new task with valid title and description', async () => {
     supabase.from.mockReturnValue({
-      insert: jest.fn().mockResolvedValue({ data: [{ id: 1, title: 'Test Task' }], error: null }),
+      insert: jest.fn().mockResolvedValue({ data: [{ id: 1, title: 'Test Task' }], error: null })
     });
 
     const { getByPlaceholderText, getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
