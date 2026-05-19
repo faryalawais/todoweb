@@ -12,7 +12,6 @@ describe('TaskInputForm', () => {
     });
 
     const { getByPlaceholderText, getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
-
     fireEvent.change(getByPlaceholderText('Task Title'), { target: { value: 'Test Task' } });
     fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Test Description' } });
     fireEvent.click(getByText('Add Task'));
@@ -22,7 +21,6 @@ describe('TaskInputForm', () => {
 
   it('should not add a task without a title', async () => {
     const { getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
-
     fireEvent.click(getByText('Add Task'));
 
     await waitFor(() => expect(getByText('Task title is required.')).toBeInTheDocument());
