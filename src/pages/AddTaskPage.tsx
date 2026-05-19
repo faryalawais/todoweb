@@ -6,11 +6,12 @@ import { supabase } from '../supabaseClient';
 const AddTaskPage = () => {
   const [tasks, setTasks] = useState([]);
 
+  const fetchTasks = async () => {
+    const { data } = await supabase.from('tasks').select('*');
+    setTasks(data);
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      const { data } = await supabase.from('tasks').select('*');
-      setTasks(data);
-    };
     fetchTasks();
   }, []);
 
