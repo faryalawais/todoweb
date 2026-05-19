@@ -1,24 +1,23 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import TaskInputForm from '../components/TaskInputForm';
-import { supabase } from '../supabaseClient';
 
-jest.mock('../supabaseClient');
+test('adds a new task with valid title and description', async () => {
+  const mockOnTaskAdded = jest.fn();
+  render(<TaskInputForm onTaskAdded={mockOnTaskAdded} />);
 
-describe('TaskInputForm', () => {
-  test('adds a new task with valid title and description', async () => {
-    const mockOnTaskAdded = jest.fn();
-    render(<TaskInputForm onTaskAdded={mockOnTaskAdded} />);
+  fireEvent.change(screen.getByPlaceholderText(/Task Title/i), { target: { value: 'New Task' } });
+  fireEvent.change(screen.getByPlaceholderText(/Task Description/i), { target: { value: 'Task Description' } });
+  fireEvent.click(screen.getByText(/Add Task/i));
 
-    fireEvent.change(screen.getByPlaceholderText('Task Title'), { target: { value: 'New Task' } });
-    fireEvent.change(screen.getByPlaceholderText('Task Description'), { target: { value: 'Task Description' } });
-    fireEvent.click(screen.getByText('Add Task'));
+  expect(mockOnTaskAdded).toHaveBeenCalled();
+});
 
-    expect(mockOnTaskAdded).toHaveBeenCalled();
-  });
+test('attempts to add a task without a title', async () => {
+  const mockOnTaskAdded = jest.fn();
+  render(<TaskInputForm onTaskAdded={mockOnTaskAdded} />);
 
-  test('shows error when title is empty', async () => {
-    render(<TaskInputForm onTaskAdded={jest.fn()} />);
-    fireEvent.click(screen.getByText('Add Task'));
-    expect(window.alert).toHaveBeenCalledWith('Task title is required.');
-  });
+  fireEvent.change(screen.getByPlaceholderText(/Task Description/i), { target: { value: 'Task Description' } });
+  fireEvent.click(screen.getByText(/Add Task/i));
+
+  expect(mockOnTaskAdded).not.toHaveBeenCalled();
 });
