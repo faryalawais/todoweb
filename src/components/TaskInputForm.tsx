@@ -18,13 +18,14 @@ const TaskInputForm = ({ onTaskAdded }) => {
       .insert([{ title, description }]);
 
     if (error) {
-      NotificationService.error('Failed to add task: ' + error.message);
-    } else {
-      NotificationService.success('Task added successfully!');
-      onTaskAdded(data[0]);
-      setTitle('');
-      setDescription('');
+      NotificationService.error('Failed to add task.');
+      return;
     }
+
+    NotificationService.success('Task added successfully!');
+    onTaskAdded(data[0]);
+    setTitle('');
+    setDescription('');
   };
 
   return (
