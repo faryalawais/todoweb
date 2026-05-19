@@ -6,10 +6,9 @@ const TaskInputForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleAddTask = async () => {
     if (!title) {
-      NotificationService.error('Task title is required.');
+      NotificationService.show('Task title is required.');
       return;
     }
 
@@ -18,9 +17,9 @@ const TaskInputForm = ({ onTaskAdded }) => {
       .insert([{ title, description }]);
 
     if (error) {
-      NotificationService.error('Failed to add task.');
+      NotificationService.show('Error adding task: ' + error.message);
     } else {
-      NotificationService.success('Task added successfully!');
+      NotificationService.show('Task added successfully!');
       onTaskAdded(data[0]);
       setTitle('');
       setDescription('');
@@ -28,21 +27,20 @@ const TaskInputForm = ({ onTaskAdded }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Task Title"
-        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Task Description"
       />
-      <button type="submit">Add Task</button>
-    </form>
+      <button onClick={handleAddTask}>Add Task</button>
+    </div>
   );
 };
 
