@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "kind": "spinos-tc-traceability",
+  "featureId": "cmpceojd0000voa01kwyf5694",
+  "featureSlug": "add-new-tasks",
+  "featureName": "Add new tasks",
+  "projectId": "cmp6kupb0000alo012rolmsfb",
+  "generatedAt": "2026-05-20T09:30:07.921Z",
+  "specs": [
+    {
+      "requirementNumber": 3,
+      "title": "Add New Tasks",
+      "acceptanceCriteria": [
+        {
+          "code": "AC-001",
+          "description": "Task title is required and must not be empty.",
+          "verificationStatus": "VERIFIED"
+        },
+        {
+          "code": "AC-002",
+          "description": "Task title must be unique.",
+          "verificationStatus": "VERIFIED"
+        },
+        {
+          "code": "AC-003",
+          "description": "User receives a confirmation message upon successful task addition.",
+          "verificationStatus": "VERIFIED"
+        },
+        {
+          "code": "AC-004",
+          "description": "New task appears in the task list after addition.",
+          "verificationStatus": "VERIFIED"
+        }
+      ],
+      "testCases": [
+        {
+          "code": "TC-001",
+          "description": "Add a new task with valid title and description.",
+          "layer": "UNIT"
+        },
+        {
+          "code": "TC-002",
+          "description": "Attempt to add a task without a title.",
+          "layer": "UNIT"
+        },
+        {
+          "code": "TC-003",
+          "description": "Attempt to add a task with a duplicate title.",
+          "layer": "UNIT"
+        }
+      ]
+    }
+  ]
+}
