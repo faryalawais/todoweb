@@ -2,7 +2,7 @@
   "name": "todoweb",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern",
     "typecheck": "tsc --noEmit",
     "unit": "vitest",
     "build": "tsc"
@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "eslint": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "typescript": "^4.0.0",
     "vitest": "^0.0.0",
     "@types/react": "^17.0.0",
