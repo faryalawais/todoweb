@@ -1,7 +1,7 @@
-const NotificationService = {
-  notify(message) {
+class NotificationService {
+  static show(message) {
     alert(message);
-  },
-};
+  }
+}
 
 export default NotificationService;
