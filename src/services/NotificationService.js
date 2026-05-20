@@ -1,11 +1,7 @@
-class NotificationService {
-  static success(message) {
+const NotificationService = {
+  notify(message) {
     alert(message);
-  }
-
-  static error(message) {
-    alert(message);
-  }
-}
+  },
+};
 
 export default NotificationService;
