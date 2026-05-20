@@ -4,7 +4,6 @@ import TaskInputForm from '../components/TaskInputForm';
 import { supabase } from '../supabaseClient';
 
 jest.mock('../supabaseClient');
-jest.mock('../services/NotificationService');
 
 describe('TaskInputForm', () => {
   it('should add a new task with valid title and description', async () => {
@@ -13,14 +12,14 @@ describe('TaskInputForm', () => {
     });
     const { getByPlaceholderText, getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
     fireEvent.change(getByPlaceholderText('Task Title'), { target: { value: 'Test Task' } });
-    fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Test Description' } });
+    fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Description' } });
     fireEvent.click(getByText('Add Task'));
-    await waitFor(() => expect(NotificationService.success).toHaveBeenCalledWith('Task added successfully!'));
+    await waitFor(() => expect(supabase.from().insert).toHaveBeenCalled());
   });
 
-  it('should not add a task without a title', async () => {
+  it('should show error when title is empty', async () => {
     const { getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
     fireEvent.click(getByText('Add Task'));
-    await waitFor(() => expect(NotificationService.error).toHaveBeenCalledWith('Task title is required.'));
+    expect(window.alert).toHaveBeenCalledWith('Task title is required.');
   });
 });
