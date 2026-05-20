@@ -8,17 +8,21 @@ jest.mock('../supabaseClient');
 describe('TaskInputForm', () => {
   it('should add a new task with valid title and description', async () => {
     supabase.from.mockReturnValue({
-      insert: jest.fn().mockResolvedValue({ data: [{ id: 1, title: 'Test Task' }], error: null })
+      insert: jest.fn().mockResolvedValue({ data: [{ id: 1, title: 'Test Task' }], error: null }),
     });
+
     const { getByPlaceholderText, getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
+
     fireEvent.change(getByPlaceholderText('Task Title'), { target: { value: 'Test Task' } });
-    fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Description' } });
+    fireEvent.change(getByPlaceholderText('Task Description'), { target: { value: 'Test Description' } });
     fireEvent.click(getByText('Add Task'));
+
     await waitFor(() => expect(supabase.from().insert).toHaveBeenCalled());
   });
 
-  it('should show error when title is empty', async () => {
+  it('should not add a task without a title', async () => {
     const { getByText } = render(<TaskInputForm onTaskAdded={jest.fn()} />);
+
     fireEvent.click(getByText('Add Task'));
     expect(window.alert).toHaveBeenCalledWith('Task title is required.');
   });
