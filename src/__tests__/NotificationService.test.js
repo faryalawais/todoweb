@@ -2,10 +2,10 @@ import { describe, it, expect, vi } from 'vitest';
 import NotificationService from '../services/NotificationService';
 
 describe('NotificationService', () => {
-  it('should call alert with the correct message', () => {
-    const message = 'Test Notification';
-    window.alert = vi.fn();
-    NotificationService.notify(message);
-    expect(window.alert).toHaveBeenCalledWith(message);
+  it('shows notification message', () => {
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    NotificationService.show('Test Message');
+    expect(alertSpy).toHaveBeenCalledWith('Test Message');
+    alertSpy.mockRestore();
   });
 });
