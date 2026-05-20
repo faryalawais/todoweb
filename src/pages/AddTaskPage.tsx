@@ -7,13 +7,12 @@ const AddTaskPage = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+    const fetchTasks = async () => {
+      const { data } = await supabase.from('tasks').select('*');
+      setTasks(data);
+    };
     fetchTasks();
   }, []);
-
-  const fetchTasks = async () => {
-    const { data } = await supabase.from('tasks').select('*');
-    setTasks(data);
-  };
 
   const handleTaskAdded = (newTask) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
