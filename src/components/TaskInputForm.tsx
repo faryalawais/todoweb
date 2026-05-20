@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
-import NotificationService from '../services/NotificationService';
+import React, { useState } from "react";
+import { supabase } from "../supabaseClient";
+import NotificationService from "../services/NotificationService";
 
-const TaskInputForm = ({ onTaskAdded }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+interface Props {
+  onTaskAdded: (task: { id: number; title: string }) => void;
+}
+
+const TaskInputForm = ({ onTaskAdded }: Props) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleAddTask = async () => {
     if (!title) {
-      NotificationService.error('Task title is required.');
+      NotificationService.error("Task title is required.");
       return;
     }
 
     const { data, error } = await supabase
-      .from('tasks')
+      .from("tasks")
       .insert([{ title, description }]);
 
     if (error) {
-      NotificationService.error('Failed to add task.');
+      NotificationService.error("Failed to add task.");
       return;
     }
 
-    NotificationService.success('Task added successfully!');
-    onTaskAdded(data[0]);
-    setTitle('');
-    setDescription('');
+    NotificationService.success("Task added successfully!");
+    if (data && data[0]) {
+      onTaskAdded(data[0]);
+    }
+    setTitle("");
+    setDescription("");
   };
 
   return (
