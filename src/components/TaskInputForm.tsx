@@ -1,52 +1,46 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
+import NotificationService from '../services/NotificationService';
 
 const TaskInputForm = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
 
-  const handleAddTask = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!title) {
-      setError('Task title is required.');
+      NotificationService.error('Task title is required.');
       return;
     }
-
-    const { data, error: insertError } = await supabase
+    const { data, error } = await supabase
       .from('tasks')
       .insert([{ title, description }]);
-
-    if (insertError) {
-      if (insertError.code === '23505') {
-        setError('Task title must be unique.');
-      } else {
-        setError('Error adding task.');
-      }
+    if (error) {
+      NotificationService.error('Failed to add task: ' + error.message);
     } else {
+      NotificationService.success('Task added successfully!');
       onTaskAdded(data[0]);
       setTitle('');
       setDescription('');
-      setError('');
-      alert('Task added successfully!');
     }
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Task Title"
+        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Task Description"
       />
-      <button onClick={handleAddTask}>Add Task</button>
-      {error && <p>{error}</p>}
-    </div>
+      <button type="submit">Add Task</button>
+    </form>
   );
 };
 
