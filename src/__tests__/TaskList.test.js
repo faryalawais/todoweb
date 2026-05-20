@@ -1,13 +1,23 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render } from '@testing-library/react';
 import TaskList from '../components/TaskList';
+import { supabase } from '../supabaseClient';
+
+vi.mock('../supabaseClient');
 
 describe('TaskList', () => {
-  it('renders tasks correctly', () => {
-    const tasks = [{ id: 1, title: 'Task 1' }, { id: 2, title: 'Task 2' }];
-    const { getByText } = render(<TaskList tasks={tasks} />);
+  beforeEach(() => {
+    supabase.from.mockReturnValue({
+      select: vi.fn().mockResolvedValue({ data: [{ id: 1, title: 'Existing Task' }] })
+    });
+  });
 
-    expect(getByText('Task 1')).toBeInTheDocument();
-    expect(getByText('Task 2')).toBeInTheDocument();
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should render tasks from the database', async () => {
+    const { findByText } = render(<TaskList />);
+    expect(await findByText('Existing Task')).toBeInTheDocument();
   });
 });
